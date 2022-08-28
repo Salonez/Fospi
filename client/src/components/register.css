@@ -1,0 +1,8 @@
+.register-container form {
+    display: flex;
+    flex-direction:  column;
+}
+
+.register-container form input {
+    margin: 2px;
+}
