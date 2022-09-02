@@ -32,8 +32,10 @@ export default function Login() {
 			<form action="" onSubmit={submitHandler}>
 				<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
 				<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
-				<button type='submit'>Submit</button>
+				<button type='submit'>Login</button>
 			</form>
+            <br/>
+            <button type='submit'>Sign up</button>
 		</div>
     )
 }
