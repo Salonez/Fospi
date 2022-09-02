@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
-import './login.css'
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import './login.css';
 
 export default function Login() {
 
+    let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 	
@@ -25,6 +27,13 @@ export default function Login() {
 		})
 		const returnData = await response.json();
 		console.log(returnData);
+        if (returnData['message'] === "User not found.") {
+            navigate('/Home');
+        } else if (returnData['message'] === "User not found.") {
+            navigate('/Error');
+        } else if (returnData['message'] ===  "Incorrect password.") {
+            navigate('/Error');
+        }
 	}
 
     return (
