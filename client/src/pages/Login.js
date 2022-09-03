@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar/Navbar';
 import './styles/login.css';
 
 export default function Login() {
@@ -44,7 +43,6 @@ export default function Login() {
 
     return (
 		<div>
-			<Navbar />
 			<div className='register-container'>
 				<form action="" onSubmit={submitHandler}>
 					<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>

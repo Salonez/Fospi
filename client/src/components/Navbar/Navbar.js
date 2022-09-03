@@ -11,7 +11,7 @@ import {
 const Navbar = () => {
   return (
     <Nav> 
-      <NavLink to="/home">
+      <NavLink to="/">
         <h1>Logo</h1>
       </NavLink>
       <Bars />
@@ -19,12 +19,15 @@ const Navbar = () => {
         <NavLink to="/menu" activeStyle>
           Menu
         </NavLink>
+        <NavLink to="/dietary-needs" activeStyle>
+          Dietary Needs
+        </NavLink>
         <NavLink to="/about" activeStyle>
           About
         </NavLink>
       </NavMenu>
       <NavBtn>
-        <NavBtnLink to="/login">login</NavBtnLink>
+        <NavBtnLink to="/login">Sign out</NavBtnLink>
       </NavBtn>
     </Nav>
   );

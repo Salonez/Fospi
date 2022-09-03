@@ -1,15 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react'
 import Navbar from '../components/Navbar/Navbar';
-import './styles/home.css';
 
-export default function Home() {
-
-
+export default function DietaryNeeds() {
     return (
         <div>
             <Navbar />
-            Home
+            Dietary Needs
         </div>
     )
-
 }

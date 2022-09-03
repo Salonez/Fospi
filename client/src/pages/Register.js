@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Navbar from '../components/Navbar/Navbar';
 import './styles/register.css'
 
 export default function Register() {
@@ -36,7 +35,6 @@ export default function Register() {
 
 	return (
 		<div>
-			<Navbar />
 			<div className='register-container'>
 				<form action="" onSubmit={submitHandler}>
 					<input type="text" placeholder="First Name" onChange={e=>setFirstName(e.target.value)}/>
