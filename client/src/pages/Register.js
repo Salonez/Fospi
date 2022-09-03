@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Navbar from '../components/Navbar/Navbar';
 import './styles/register.css'
 
 export default function Register() {
@@ -34,15 +35,18 @@ export default function Register() {
 	}
 
 	return (
-		<div className='register-container'>
-			<form action="" onSubmit={submitHandler}>
-				<input type="text" placeholder="First Name" onChange={e=>setFirstName(e.target.value)}/>
-				<input type="text" placeholder="Last Name" onChange={e=>setLastName(e.target.value)}/>
-				<input type="number" placeholder="Age" min="0" onChange={e=>setAge(e.target.value)}/>
-				<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
-				<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
-				<button type='submit'>Submit</button>
-			</form>
+		<div>
+			<Navbar />
+			<div className='register-container'>
+				<form action="" onSubmit={submitHandler}>
+					<input type="text" placeholder="First Name" onChange={e=>setFirstName(e.target.value)}/>
+					<input type="text" placeholder="Last Name" onChange={e=>setLastName(e.target.value)}/>
+					<input type="number" placeholder="Age" min="0" onChange={e=>setAge(e.target.value)}/>
+					<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
+					<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
+					<button type='submit'>Submit</button>
+				</form>
+			</div>
 		</div>
 	)
 }

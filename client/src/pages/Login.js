@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
 import './styles/login.css';
 
 export default function Login() {
@@ -36,15 +37,23 @@ export default function Login() {
         }
 	}
 
+	async function signUp(e) {
+		e.preventDefault();
+		navigate('/register');
+	}
+
     return (
-        <div className='register-container'>
-			<form action="" onSubmit={submitHandler}>
-				<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
-				<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
-				<button type='submit'>Login</button>
-			</form>
-            <br/>
-            <button type='submit'>Sign up</button>
+		<div>
+			<Navbar />
+			<div className='register-container'>
+				<form action="" onSubmit={submitHandler}>
+					<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
+					<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
+					<button type='submit'>Login</button>
+				</form>
+				<br/>
+				<button type='submit' onClick={signUp}>Sign up</button>
+			</div>
 		</div>
     )
 }
