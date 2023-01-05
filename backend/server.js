@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from 'mongoose';
 import User from './models/User.js';
 import cors from 'cors';
+import { ObjectId } from "bson"
 
 // Store user id
 let userId;
@@ -55,6 +56,19 @@ app.post('/login', async (req, res) => {
         } else {
             userId = user._id.toString();
             res.status(200).json({message: "User found."});
+        }
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+})
+
+app.get('/DietaryNeeds', async (req, res) => {
+    try {
+        const user = await User.findOne({_id: ObjectId(req.body._id)}); // Going to change found from input to using userId
+        if (!user) {
+            res.status(404).json({message: "User not found."});
+        } else {
+            res.status(200).json({message: "User found.", diets: user.diet});
         }
     } catch (err) {
         res.status(400).json({message: err.message});

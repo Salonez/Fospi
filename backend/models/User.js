@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema (
             required: true
         },
         diet: {
-            type: String,
+            type: [String],
             default: []
         }
     }
