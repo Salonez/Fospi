@@ -1,0 +1,9 @@
+{
+    "name": "Cereal",
+    "kJ": 260,
+    "Options": [["Rolled Oats"], ["Weet-Bix"], ["Corn Flakes", "GF"],
+    ["Rice Pops", "GF"], ["Muesli", "GF"]],
+    "Compatible Diets": ["Vegan", "Vegetarian"],
+    "Incompatible Diets": ["Low-fiber"],
+    "Picture": "WIP"
+}
