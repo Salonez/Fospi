@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import User from './models/User.js';
 import cors from 'cors';
 
+// Store user id
+let userId;
+
 const app = express();
 app.use(express.json());
 
@@ -35,6 +38,7 @@ app.post('/register', async (req, res) => {
 
     try {
         const newUser = await user.save();
+        userId = user._id.toString();
         res.status(200).json(newUser);
     } catch (err) {
         res.status(400).json({message: err.message});
@@ -49,6 +53,7 @@ app.post('/login', async (req, res) => {
         } else if (user.password !== req.body.password) {
             res.status(403).json({message: "Incorrect password."});
         } else {
+            userId = user._id.toString();
             res.status(200).json({message: "User found."});
         }
     } catch (err) {
