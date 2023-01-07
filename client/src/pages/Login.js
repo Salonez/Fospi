@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import  { changeUserId } from '../components/Storage';
 import './styles/login.css';
 
 export default function Login() {
@@ -28,6 +29,7 @@ export default function Login() {
 		const returnData = await response.json();
 		console.log(returnData);
         if (returnData['message'] === "User found.") {
+			changeUserId(returnData['id']);
             navigate('/menu');
         } else if (returnData['message'] === "User not found.") {
             navigate('/error');

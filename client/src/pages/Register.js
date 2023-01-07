@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import './styles/register.css'
+import React, {useState} from 'react';
+import  { changeUserId } from '../components/Storage';
+import './styles/register.css';
 
 export default function Register() {
 
@@ -20,8 +21,6 @@ export default function Register() {
 			password
 		}
 
-		console.log(user);
-
 		const response = await fetch ('http://127.0.0.1:8000/register', {
 			method: 'POST',
 			headers: {
@@ -30,7 +29,7 @@ export default function Register() {
 			body: JSON.stringify(user)
 		})
 		const returnData = await response.json();
-		console.log(returnData);
+		changeUserId(returnData['id']);
 	}
 
 	return (

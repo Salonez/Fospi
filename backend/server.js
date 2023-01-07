@@ -4,9 +4,6 @@ import User from './models/User.js';
 import cors from 'cors';
 import { ObjectId } from "bson"
 
-// Store user id
-let userId;
-
 const app = express();
 app.use(express.json());
 
@@ -39,8 +36,8 @@ app.post('/register', async (req, res) => {
 
     try {
         const newUser = await user.save();
-        userId = user._id.toString();
-        res.status(200).json(newUser);
+        const userId = newUser._id.toString();
+        res.status(200).json({id: userId});
     } catch (err) {
         res.status(400).json({message: err.message});
     }
@@ -54,17 +51,17 @@ app.post('/login', async (req, res) => {
         } else if (user.password !== req.body.password) {
             res.status(403).json({message: "Incorrect password."});
         } else {
-            userId = user._id.toString();
-            res.status(200).json({message: "User found."});
+            const userId = user._id.toString();
+            res.status(200).json({message: "User found.", id: userId});
         }
     } catch (err) {
         res.status(400).json({message: err.message});
     }
 })
 
-app.get('/DietaryNeeds', async (req, res) => {
+app.post('/DietaryNeeds', async (req, res) => {
     try {
-        const user = await User.findOne({_id: ObjectId(req.body._id)}); // Going to change found from input to using userId
+        const user = await User.findOne({_id: ObjectId(req.body._id)});
         if (!user) {
             res.status(404).json({message: "User not found."});
         } else {
