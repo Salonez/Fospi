@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import  { changeUserId } from '../components/Storage';
+import  { changeAdmin, changeUserId } from '../components/Storage';
 import './styles/register.css';
 
 export default function Register() {
@@ -9,6 +9,7 @@ export default function Register() {
     const [age, setAge] = useState(0);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+	const [admin, setAdmin] = useState(false);
 	
 	async function submitHandler(e) {
 		e.preventDefault();
@@ -18,7 +19,8 @@ export default function Register() {
 			lastName,
 			age,
 			username,
-			password
+			password,
+			admin
 		}
 
 		const response = await fetch ('http://127.0.0.1:8000/register', {
@@ -30,6 +32,7 @@ export default function Register() {
 		})
 		const returnData = await response.json();
 		changeUserId(returnData['id']);
+		changeAdmin(admin);
 	}
 
 	return (
@@ -41,6 +44,7 @@ export default function Register() {
 					<input type="number" placeholder="Age" min="0" onChange={e=>setAge(e.target.value)}/>
 					<input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)}/>
 					<input type="text" placeholder="Password" onChange={e=>setPassword(e.target.value)}/> {/* Setting type to 'password'? */}
+					<div><input type="checkbox" onChange={e=>setAdmin(!admin)}/> Admin</div>
 					<button type='submit'>Submit</button>
 				</form>
 			</div>

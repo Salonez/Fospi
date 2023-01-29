@@ -31,7 +31,8 @@ app.post('/register', async (req, res) => {
         lastName: req.body.lastName,
         age: req.body.age,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        admin: req.body.admin
     })
 
     try {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import  { changeUserId } from '../components/Storage';
+import  { changeAdmin, changeUserId } from '../components/Storage';
 import './styles/login.css';
 
 export default function Login() {
@@ -17,8 +17,6 @@ export default function Login() {
 			password
 		}
 
-		console.log(user);
-
 		const response = await fetch ('http://127.0.0.1:8000/login', {
 			method: 'POST',
 			headers: {
@@ -27,9 +25,9 @@ export default function Login() {
 			body: JSON.stringify(user)
 		})
 		const returnData = await response.json();
-		console.log(returnData);
         if (returnData['message'] === "User found.") {
 			changeUserId(returnData['id']);
+			changeAdmin(returnData['admin']);
             navigate('/menu');
         } else if (returnData['message'] === "User not found.") {
             navigate('/error');
