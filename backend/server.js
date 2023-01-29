@@ -72,5 +72,14 @@ app.post('/DietaryNeeds', async (req, res) => {
     }
 })
 
+app.post('/UpdateDietaryNeeds', async (req, res) => {
+    try {
+        const user = await User.updateOne({_id: ObjectId(req.body._id)},{$set : {diet: req.body.diets}});
+        res.status(200).json({message: "Updated dietary needs"});
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+})
+
 
 app.listen(8000, () => console.log("Server is running on port 8000"));

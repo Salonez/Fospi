@@ -7,17 +7,28 @@ export default function DietaryNeeds() {
     // Set up what diets the user is on and tick those boxes
     const [diets, setDiets] = useState([]);
     const allDiets = ["vegetarian", "pescatarian", "vegan", "lowFibre"];
-    let checks = [];
+    const checkboxRefs = {};
 
-    // function buildCheckBox(diet) {
-    //     if (diets.includes(diet)) {
-    //         checks.push(React.createElement("checkbox", {checked: true}, "{diet}"));
-    //     } else {
-    //         checks.push(React.createElement("checkbox", {}, "{diet}"));
-    //     }
-    // }
+    async function updateDiets(e) {
+        // updates the diets under the patient on mongoDB
+		e.preventDefault();
+        const selectedDiets = allDiets.filter((diet, index) => checkboxRefs[index].checked);
+        const response = await fetch ('http://127.0.0.1:8000/UpdateDietaryNeeds', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+                '_id': userId,
+                'diets': selectedDiets})
+		})
+		const returnData = await response.json();
+		console.log(returnData);
+    }
 
-    useEffect(() => { 
+    useEffect(() => {
+        // Finds the dietary the patient is currently under and
+        // automatically checks the boxes of the corresponding diets.
         fetch('http://127.0.0.1:8000/DietaryNeeds', {
 			method: 'POST',
 			headers: {
@@ -28,9 +39,6 @@ export default function DietaryNeeds() {
             })
         }).then(response => response.json())
         .then(json => setDiets(json['diets']));
-        // .then(() => {
-        //     allDiets.forEach(buildCheckBox);
-        // })
     }, []);
 
     return (
@@ -38,12 +46,13 @@ export default function DietaryNeeds() {
             <Navbar />
             <div>
                 <h1>Current diets:</h1>
-                    <form>
-                        {allDiets.map(diet => {
+                    <form action="" onSubmit={updateDiets}>
+                        {allDiets.map((diet, index) => {
                             if (diets.includes(diet))
-                                return <pre><input type="checkbox" defaultChecked={true}/>{diet}</pre>;
-                            return <pre><input type="checkbox"/>{diet}</pre>;
+                                return <div><input type="checkbox" defaultChecked={true} ref={(ref) => { checkboxRefs[index] = ref }}/>{diet}</div>;
+                            return <div><input type="checkbox" ref={(ref) => { checkboxRefs[index] = ref }}/>{diet}</div>;
                         })}
+                        <button type='submit'>Save</button>
                     </form>
             </div>
         </div>
