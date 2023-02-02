@@ -1,12 +1,12 @@
 let userId = "";
-let admin = false;
+let isAdmin = false;
 
 function changeUserId(newId) {
     userId = newId;
 }
 
 function changeAdmin(newAdmin) {
-    admin = newAdmin;
+    isAdmin = newAdmin;
 }
 
-export {userId, changeUserId, admin, changeAdmin};
+export {userId, changeUserId, isAdmin, changeAdmin};

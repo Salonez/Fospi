@@ -6,6 +6,7 @@ import Menu from './pages/Menu';
 import DietaryNeeds from './pages/DietaryNeeds';
 import About from './pages/About';
 import Error from './pages/Error';
+import Admin from './pages/Admin';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path='/menu' element={<Menu />} />
           <Route exact path='/dietary-needs' element={<DietaryNeeds />} />
           <Route exact path='/about' element={<About />} />
+          <Route exact path='/admin' element={<Admin />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </BrowserRouter>

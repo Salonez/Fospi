@@ -38,7 +38,8 @@ app.post('/register', async (req, res) => {
     try {
         const newUser = await user.save();
         const userId = newUser._id.toString();
-        res.status(200).json({id: userId});
+        const admin = newUser.admin;
+        res.status(200).json({id: userId, admin: admin});
     } catch (err) {
         res.status(400).json({message: err.message});
     }
@@ -53,7 +54,8 @@ app.post('/login', async (req, res) => {
             res.status(403).json({message: "Incorrect password."});
         } else {
             const userId = user._id.toString();
-            res.status(200).json({message: "User found.", id: userId});
+            const admin = user.admin;
+            res.status(200).json({message: "User found.", id: userId, admin: admin});
         }
     } catch (err) {
         res.status(400).json({message: err.message});
