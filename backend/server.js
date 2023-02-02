@@ -92,12 +92,12 @@ app.post('/UploadMeal', async (req, res) => {
         options: req.body.options,
         compatibleDiets: req.body.compatiableDiets,
         incompatibleDiets: req.body.incompatibleDiets,
-        picture: req.body.picure
+        picture: req.body.picture
     })
 
     try {
         const newMeal = await meal.save();
-        res.status(200).json({message: "Uploaded ${newMeal.name}"});
+        res.status(200).json({message: "Uploaded " + meal.name});
     } catch (err) {
         res.status(400).json({message: err.message});
     }
