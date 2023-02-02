@@ -14,7 +14,7 @@ const MealSchema = mongoose.Schema (
             type: [[String]],
             default: []
         },
-        compatiableDiets: {
+        compatibleDiets: {
             type: [String],
             default: []
         },
@@ -23,7 +23,8 @@ const MealSchema = mongoose.Schema (
             default: []
         },
         picture: {
-            // got to do
+            type: Buffer,
+            required: true
         }
     }
 );

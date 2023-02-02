@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from 'mongoose';
 import User from './models/User.js';
+import Meal from './models/Meal.js';
 import cors from 'cors';
 import { ObjectId } from "bson"
 
@@ -84,5 +85,22 @@ app.post('/UpdateDietaryNeeds', async (req, res) => {
     }
 })
 
+app.post('/UploadMeal', async (req, res) => {
+    const meal = new Meal({
+        name: req.body.name,
+        kilojoules: req.body.kilojoules,
+        options: req.body.options,
+        compatibleDiets: req.body.compatiableDiets,
+        incompatibleDiets: req.body.incompatibleDiets,
+        picture: req.body.picure
+    })
+
+    try {
+        const newMeal = await meal.save();
+        res.status(200).json({message: "Uploaded ${newMeal.name}"});
+    } catch (err) {
+        res.status(400).json({message: err.message});
+    }
+})
 
 app.listen(8000, () => console.log("Server is running on port 8000"));
