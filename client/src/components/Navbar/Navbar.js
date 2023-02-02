@@ -10,49 +10,29 @@ import {
 } from './NavbarElements';
 
 const Navbar = () => {
-  if (isAdmin) {
-    return (
-      <Nav> 
-        <Bars />
-        <NavMenu>
-          <NavLink to="/menu" activeStyle>
-            Menu
-          </NavLink>
-          <NavLink to="/dietary-needs" activeStyle>
-            Dietary Needs
-          </NavLink>
-          <NavLink to="/about" activeStyle>
-            About
-          </NavLink>
+  return (
+    <Nav> 
+      <Bars />
+      <NavMenu>
+        <NavLink to="/menu" activeStyle>
+          Menu
+        </NavLink>
+        <NavLink to="/dietary-needs" activeStyle>
+          Dietary Needs
+        </NavLink>
+        <NavLink to="/about" activeStyle>
+          About
+        </NavLink>
+        {isAdmin && (
           <NavLink to="/admin" activeStyle>
             Admin
           </NavLink>
-        </NavMenu>
-        <NavBtn>
-          <NavBtnLink to="/login">Sign out</NavBtnLink>
-        </NavBtn>
-      </Nav>
-    );
-  } else {
-    return (
-      <Nav> 
-        <Bars />
-        <NavMenu>
-          <NavLink to="/menu" activeStyle>
-            Menu
-          </NavLink>
-          <NavLink to="/dietary-needs" activeStyle>
-            Dietary Needs
-          </NavLink>
-          <NavLink to="/about" activeStyle>
-            About
-          </NavLink>
-        </NavMenu>
-        <NavBtn>
-          <NavBtnLink to="/login">Sign out</NavBtnLink>
-        </NavBtn>
-      </Nav>
-    );
-  }
+        )}
+      </NavMenu>
+      <NavBtn>
+        <NavBtnLink to="/login">Sign out</NavBtnLink>
+      </NavBtn>
+    </Nav>
+  );
 };
 export default Navbar;
