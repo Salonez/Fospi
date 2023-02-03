@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar/Navbar';
+import ArrayList from '../components/ArrayList';
 
 export default function Admin() {
 
     const [name, setName] = useState('');
     const [kilojules, setKilojules] = useState(0);
-    const [options, setOptions] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const [options, setOptions] = useState([]);
     const [incompatibleDiets, setIncompatibleDiets] = useState('');
     const [image, setImage] = useState(null);
 
+    // Functions for updating options
+    const handleInputChange = event => {
+        event.preventDefault();
+        setInputValue(event.target.value);
+    };
+
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+        const items = inputValue.split(',');
+        setOptions([...options, items]);
+        setInputValue('');
+    };
+
+    // Functions for image
     const handleDrop = (event) => {
         event.preventDefault();
         const file = event.dataTransfer.files[0];
@@ -26,7 +42,21 @@ export default function Admin() {
 				<form action="" onSubmit={console.log("HELLO")}>
 					<input type="text" placeholder="Name" onChange={e=>setName(e.target.value)}/>
 					<input type="number" placeholder="Kilojules" onChange={e=>setKilojules(e.target.value)}/>
-					<input type="text" placeholder="Options" min="0" onChange={e=>setOptions(e.target.value)}/>
+                    <input
+                        type="text"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        placeholder="Options"
+                    />
+                    <button onClick={handleButtonClick}>Add to Options</button>
+                    <div>
+                        {options.length ? (<div>Options:</div>) : null}
+                        {options.map((option, index) => (
+                            <div key={index}>
+                                <ArrayList list={option} />
+                            </div>
+                        ))}
+                    </div>
 					<input type="text" placeholder="Incompatible Diets" onChange={e=>setIncompatibleDiets(e.target.value)}/>
                     <div
                         style={{
